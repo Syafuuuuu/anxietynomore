@@ -1,11 +1,11 @@
 import 'package:anxietynomore/contacts_page.dart';
+import 'package:anxietynomore/music_page.dart';
 import 'package:anxietynomore/drawing_page.dart';
 import 'package:anxietynomore/fidget_button.dart';
 import 'package:anxietynomore/treehole_page.dart';
 import 'package:flutter/material.dart';
 import 'package:anxietynomore/circle_page.dart';
 import 'package:anxietynomore/asmr_page.dart';
-import 'package:anxietynomore/music_page.dart';
 
 
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Anxiety No More',
+      title: 'Wave',
       theme: ThemeData(
         // primarySwatch: Colors.blue,
         colorScheme: ColorScheme.fromSeed(
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Anxiety No More'),
+        title: const Text('Wave'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.contacts), // choose an appropriate icon

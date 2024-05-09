@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:anxietynomore/contacts_page.dart';
 import 'package:anxietynomore/music_page.dart';
+import 'package:flutter/services.dart';
 
 class PopFidgetToy extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _PopFidgetToyState extends State<PopFidgetToy> {
   void togglePop(int index) {
     setState(() {
       isPopped[index] = !isPopped[index];
+      HapticFeedback.heavyImpact();
     });
   }
 
