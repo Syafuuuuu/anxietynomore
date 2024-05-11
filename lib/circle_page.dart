@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Page3 extends StatefulWidget {
   const Page3({super.key});
@@ -14,7 +15,7 @@ class _Page3State extends State<Page3> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-    super.initState();
+    super.initState();    
 
     controller = AnimationController(
       duration: const Duration(seconds: 4),
@@ -23,7 +24,9 @@ class _Page3State extends State<Page3> with SingleTickerProviderStateMixin {
 
     animation = Tween<double>(begin: 200, end: 400).animate(controller)
       ..addListener(() {
-        setState(() {});
+        setState(() {
+          HapticFeedback.heavyImpact();
+        });
       });
   }
 

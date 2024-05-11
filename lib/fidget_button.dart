@@ -2,7 +2,7 @@ import 'package:anxietynomore/counter_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:anxietynomore/pop_fidget_toy.dart';
 import 'package:anxietynomore/flash_card_grid.dart';
-
+import 'package:confetti/confetti.dart';
 
 class FidgetPage extends StatefulWidget {
   @override
@@ -12,10 +12,14 @@ class FidgetPage extends StatefulWidget {
 class _FidgetPageState extends State<FidgetPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  late ConfettiController _confcontroller;
   bool isToggleOn = false;
   bool isSpacebarPressed = false;
   bool isLampOn = false;
   bool isPenClicked = false;
+  double red = 0;
+  double green = 0;
+  double blue = 0;
 
   @override
   void initState() {
@@ -24,6 +28,7 @@ class _FidgetPageState extends State<FidgetPage>
       vsync: this,
       duration: Duration(milliseconds: 300),
     );
+    _confcontroller = ConfettiController(duration: Duration(seconds: 2));
   }
 
   void _toggleToggle() {
@@ -124,8 +129,8 @@ class _FidgetPageState extends State<FidgetPage>
               GestureDetector(
                 onTap: _toggleSpacebar,
                 child: AnimatedContainer(
-                  duration: Duration(milliseconds: 200),
-                  width: isSpacebarPressed ? 80 : 100,
+                  duration: Duration(milliseconds: 100),
+                  width: isSpacebarPressed ? 350 : 400,
                   height: isSpacebarPressed ? 40 : 50,
                   decoration: BoxDecoration(
                     color: isSpacebarPressed ? Colors.blue : Colors.grey,
@@ -149,62 +154,93 @@ class _FidgetPageState extends State<FidgetPage>
                   ),
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RGBBox(Color.fromRGBO(
+                      red.toInt(), green.toInt(), blue.toInt(), 1)),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Slider(
+                        thumbColor: Colors.red,
+                        activeColor: Colors.red,
+                        value: red,
+                        min: 0,
+                        max: 255,
+                        onChanged: (value) {
+                          setState(() {
+                            red = value;
+                          });
+                        },
+                      ),
+                      Slider(
+                        thumbColor: Colors.green,
+                        activeColor: Colors.green,
+                        value: green,
+                        min: 0,
+                        max: 255,
+                        onChanged: (value) {
+                          setState(() {
+                            green = value;
+                          });
+                        },
+                      ),
+                      Slider(
+                        thumbColor: Colors.blue,
+                        activeColor: Colors.blue,
+                        value: blue,
+                        min: 0,
+                        max: 255,
+                        onChanged: (value) {
+                          setState(() {
+                            blue = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
               // Lamp
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  GestureDetector(
-                    onTap: _toggleLamp,
-                    child: Container(
-                      width: 100,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: isLampOn ? Colors.yellow[200] : Colors.grey[200],
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            blurRadius: 5,
-                            spreadRadius: 1,
+                  Stack(
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.center,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _confcontroller.play();
+                          },
+                          child: Image.asset("assets/fidget/popper_icon.png"),
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                            padding: EdgeInsets.all(50),
                           ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Icon(
-                          isLampOn ? Icons.lightbulb : Icons.lightbulb_outline,
-                          size: 48,
-                          color:
-                              isLampOn ? Colors.yellow[800] : Colors.grey[600],
                         ),
                       ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: _toggleLamp,
-                    child: Container(
-                      width: 100,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: isLampOn ? Colors.yellow[200] : Colors.grey[200],
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            blurRadius: 5,
-                            spreadRadius: 1,
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Icon(
-                          isLampOn ? Icons.lightbulb : Icons.lightbulb_outline,
-                          size: 48,
-                          color:
-                              isLampOn ? Colors.yellow[800] : Colors.grey[600],
+                      Align(
+                        alignment: Alignment.center,
+                        child: ConfettiWidget(
+                          confettiController: _confcontroller,
+                          blastDirectionality: BlastDirectionality.explosive,
+                          // blastDirection: 3.14, // radial value
+                          maxBlastForce:
+                              50, // set a lower number for slow explosions
+                          minBlastForce:
+                              30, // set a higher number for faster explosions
+                          emissionFrequency: 0.05, // how often it should emit
+                          numberOfParticles: 50,
+                          maximumSize: const Size(10.0, 10.0),
+                          minimumSize: const Size(
+                              5.0, 5.0), // number of particles to emit
+                          gravity: 1,
                         ),
                       ),
-                    ),
-                  ),
+                    ],
+                  )
                 ],
               ),
               // Clicking Pen
@@ -236,19 +272,20 @@ class _FidgetPageState extends State<FidgetPage>
                   ),
                 ),
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
                     onPressed: () => _navigateToPage(PopFidgetToy()),
-                    child: Text('Page 1'),
+                    child: Image.asset("assets/fidget/popper_icon.png"),
                   ),
                   ElevatedButton(
                     onPressed: () => _navigateToPage(CounterScreen()),
-                    child: Text('Page 2'),
+                    child: Image.asset("assets/fidget/tap_icon.png"),
                   ),
                   ElevatedButton(
                     onPressed: () => _navigateToPage(FlashCardPage()),
-                    child: Text('Page 3'),
+                    child: Image.asset("assets/fidget/flash_icon.png"),
                   ),
                 ],
               ),
@@ -256,6 +293,23 @@ class _FidgetPageState extends State<FidgetPage>
           ),
         ),
       ),
+    );
+  }
+}
+
+class RGBBox extends StatelessWidget {
+  final Color color;
+
+  RGBBox(this.color);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      width: 100,
+      height: 200,
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(20), color: color),
     );
   }
 }

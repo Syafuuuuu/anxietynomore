@@ -53,6 +53,7 @@ dependencies:
   getwidget: ^4.0.0
   animated_text_kit: ^4.2.2
   flip_card: ^0.7.0
+  confetti: ^0.7.0
 
 
 dev_dependencies:
@@ -124,6 +125,9 @@ flutter:
     - assets/asmr/rec/rec8.mp3
     - assets/asmr/rec/rec9.mp3
     - assets/gifs/fidget1.gif
+    - assets/fidget/popper_icon.png
+    - assets/fidget/flash_icon.png
+    - assets/fidget/tap_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
