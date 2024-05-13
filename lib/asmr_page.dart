@@ -47,25 +47,31 @@ class _ASMRAppState extends State<ASMRApp> {
             width: 200, // Adjust this value to control the width of the image
             child: Image.asset(images[selectedSoundIndex]),
           ),
-          IconButton(
-            icon: const Icon(Icons.play_arrow),
-            onPressed: () async {
-              _assetsAudioPlayer.open(
-                Audio(sounds[selectedSoundIndex]),
-              );
-            },
+          Divider(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.play_arrow),
+                onPressed: () async {
+                  _assetsAudioPlayer.open(
+                    Audio(sounds[selectedSoundIndex]),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.pause),
+                onPressed: () async {
+                  _assetsAudioPlayer.pause();
+                },
+              ),
+            ],
           ),
-          IconButton(
-            icon: const Icon(Icons.pause),
-            onPressed: () async {
-              _assetsAudioPlayer.pause();
-            },
-          ),
-
+          Divider(),
           // Selection Panel
           SizedBox(
             height:
-                300, // Adjust this value to control the height of the selection panel
+                320, // Adjust this value to control the height of the selection panel
             child: GridView.builder(
               shrinkWrap: true,
               itemCount: sounds.length,
@@ -79,7 +85,7 @@ class _ASMRAppState extends State<ASMRApp> {
                     });
                   },
                   child: AspectRatio(
-                    aspectRatio: 0.8, // Control the aspect ratio of your images
+                    aspectRatio: 1.0, // Control the aspect ratio of your images
                     child: Image.asset(images[index]),
                   ),
                 );

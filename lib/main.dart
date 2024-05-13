@@ -6,8 +6,7 @@ import 'package:anxietynomore/treehole_page.dart';
 import 'package:flutter/material.dart';
 import 'package:anxietynomore/circle_page.dart';
 import 'package:anxietynomore/asmr_page.dart';
-
-
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,10 +22,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // primarySwatch: Colors.blue,
         colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 58, 183, 87)),
+            seedColor: Colors.white),
         useMaterial3: true,
-        scaffoldBackgroundColor: const Color.fromARGB(255, 38, 38, 38),
-        canvasColor: Colors.black38,
+        scaffoldBackgroundColor:
+            const Color.fromARGB(255, 38, 38, 38), // Changes background
+        canvasColor: const Color.fromARGB(255, 38, 38, 38), //Changes NAv Bar
       ),
       home: const MyHomePage(),
     );
@@ -42,6 +42,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 2;
+  String _pageTitle = "Breathe";
   final List<Widget> _children = [
     const ASMRApp(),
     FidgetPage(),
@@ -53,14 +54,42 @@ class _MyHomePageState extends State<MyHomePage> {
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
+      titleList(index);
     });
+  }
+
+  void titleList(int index) {
+    switch (index) {
+      case 0:
+        {
+          _pageTitle = "Sound";
+        }
+      case 1:
+        {
+          _pageTitle = "Fidgets";
+        }
+      case 2:
+        {
+          _pageTitle = "Breathe";
+        }
+      case 3:
+        {
+          _pageTitle = "Tree Hole";
+        }
+      case 4:
+        {
+          _pageTitle = "Drawing";
+        }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Wave'),
+        title: Text(_pageTitle, style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
+        backgroundColor: const Color.fromARGB(255, 38, 38, 38),
+        foregroundColor: Color.fromARGB(255, 255, 255, 255),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.contacts), // choose an appropriate icon
@@ -84,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black38,
+        backgroundColor: const Color.fromARGB(255, 38, 38, 38),
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         showSelectedLabels: true,
@@ -130,4 +159,3 @@ class PlaceholderWidget extends StatelessWidget {
     );
   }
 }
-

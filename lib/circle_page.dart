@@ -15,7 +15,7 @@ class _Page3State extends State<Page3> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-    super.initState();    
+    super.initState();
 
     controller = AnimationController(
       duration: const Duration(seconds: 4),
@@ -39,60 +39,88 @@ class _Page3State extends State<Page3> with SingleTickerProviderStateMixin {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              Container(
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 21, 21, 21), // dark grey color
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      currentImage = 'assets/breathe/moon.png';
-                    });
-                  },
-                  child: Image.asset('assets/breathe/moon.png', height: 50,),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 21, 21, 21), // dark grey color
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      currentImage = 'assets/breathe/moon.png';
-                    });
-                  },
-                  child: Image.asset('assets/breathe/moon.png', height: 50,),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 21, 21, 21), // dark grey color
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      currentImage = 'assets/breathe/sun.png';
-                    });
-                  },
-                  child: Image.asset('assets/breathe/sun.png', height: 50,),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 21, 21, 21), // dark grey color
-                  ),
                   onPressed: () {
                     setState(() {
                       currentImage = 'assets/breathe/yy.png';
                     });
                   },
-                  child: Image.asset('assets/breathe/yy.png', height: 50,),
+                  child: Image.asset(
+                    'assets/breathe/yy.png',
+                    fit: BoxFit.contain,
+                    width: 50,
+                    height: 50,
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    backgroundColor: const Color.fromARGB(255, 65, 65, 65),
+                    padding: EdgeInsets.all(20), // dark grey color
+                  ),
+                ),
+              ),
+              Container(
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      currentImage = 'assets/breathe/moon.png';
+                    });
+                  },
+                  child: Image.asset(
+                    'assets/breathe/moon.png',
+                    fit: BoxFit.contain,
+                    width: 50,
+                    height: 50,
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    backgroundColor: const Color.fromARGB(255, 65, 65, 65),
+                    padding: EdgeInsets.all(20), // dark grey color
+                  ),
+                ),
+              ),
+              Container(
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      currentImage = 'assets/breathe/sun.png';
+                    });
+                  },
+                  child: Image.asset(
+                    'assets/breathe/sun.png',
+                    fit: BoxFit.contain,
+                    width: 50,
+                    height: 50,
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    backgroundColor: const Color.fromARGB(255, 65, 65, 65),
+                    padding: EdgeInsets.all(20), // dark grey color
+                  ),
+                ),
+              ),
+              Container(
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      currentImage = 'assets/breathe/yy.png';
+                    });
+                  },
+                  child: Image.asset(
+                    'assets/breathe/yy.png',
+                    fit: BoxFit.contain,
+                    width: 50,
+                    height: 50,
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    backgroundColor: const Color.fromARGB(255, 65, 65, 65),
+                    padding: EdgeInsets.all(20), // dark grey color
+                  ),
                 ),
               ),
             ],

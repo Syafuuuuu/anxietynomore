@@ -85,27 +85,32 @@ class _FidgetPageState extends State<FidgetPage>
       body: SingleChildScrollView(
         child: Center(
           child: Container(
+            padding: EdgeInsets.all(10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 // Toggle Button
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Switch(
-                      value: isToggleOn,
-                      onChanged: (newValue) {
-                        _toggleToggle();
-                      },
-                    ),
                     SizedBox(
-                      width: 20,
+                      width: 200,
+                      height: 150,
+                      child: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Switch(
+                          value: isToggleOn,
+                          onChanged: (newValue) {
+                            _toggleToggle();
+                          },
+                        ),
+                      ),
                     ),
                     GestureDetector(
                       onTap: _toggleLamp,
@@ -113,7 +118,8 @@ class _FidgetPageState extends State<FidgetPage>
                         width: 150,
                         height: 150,
                         decoration: BoxDecoration(
-                          color: isLampOn ? Colors.yellow[200] : Colors.grey[200],
+                          color:
+                              isLampOn ? Colors.yellow[200] : Colors.grey[200],
                           borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                             BoxShadow(
@@ -125,17 +131,20 @@ class _FidgetPageState extends State<FidgetPage>
                         ),
                         child: Center(
                           child: Icon(
-                            isLampOn ? Icons.lightbulb : Icons.lightbulb_outline,
+                            isLampOn
+                                ? Icons.lightbulb
+                                : Icons.lightbulb_outline,
                             size: 48,
-                            color:
-                                isLampOn ? Colors.yellow[800] : Colors.grey[600],
+                            color: isLampOn
+                                ? Colors.yellow[800]
+                                : Colors.grey[600],
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 // Custom Spacebar Key
@@ -144,7 +153,7 @@ class _FidgetPageState extends State<FidgetPage>
                   child: AnimatedContainer(
                     duration: Duration(milliseconds: 100),
                     width: isSpacebarPressed ? 350 : 400,
-                    height: isSpacebarPressed ? 40 : 50,
+                    height: isSpacebarPressed ? 60 : 70,
                     decoration: BoxDecoration(
                       color: isSpacebarPressed ? Colors.blue : Colors.grey,
                       borderRadius: BorderRadius.circular(8),
@@ -156,7 +165,7 @@ class _FidgetPageState extends State<FidgetPage>
                         ),
                       ],
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'SPACE',
                         style: TextStyle(
@@ -167,62 +176,73 @@ class _FidgetPageState extends State<FidgetPage>
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 //RGB Colour Fidget
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    RGBBox(Color.fromRGBO(
-                        red.toInt(), green.toInt(), blue.toInt(), 1)),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    Row(
                       children: [
-                        Slider(
-                          thumbColor: Colors.red,
-                          activeColor: Colors.red,
-                          value: red,
-                          min: 0,
-                          max: 255,
-                          onChanged: (value) {
-                            setState(() {
-                              red = value;
-                            });
-                          },
+                        SizedBox(
+                          width: 150,
+                          height: 200,
+                          child: RGBBox(Color.fromRGBO(
+                              red.toInt(), green.toInt(), blue.toInt(), 1)),
                         ),
-                        Slider(
-                          thumbColor: Colors.green,
-                          activeColor: Colors.green,
-                          value: green,
-                          min: 0,
-                          max: 255,
-                          onChanged: (value) {
-                            setState(() {
-                              green = value;
-                            });
-                          },
+                        const SizedBox(
+                          width: 20,
                         ),
-                        Slider(
-                          thumbColor: Colors.blue,
-                          activeColor: Colors.blue,
-                          value: blue,
-                          min: 0,
-                          max: 255,
-                          onChanged: (value) {
-                            setState(() {
-                              blue = value;
-                            });
-                          },
+                        SizedBox(
+                          width: 230,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Slider(
+                                thumbColor: Colors.red,
+                                activeColor: Colors.red,
+                                value: red,
+                                min: 0,
+                                max: 255,
+                                onChanged: (value) {
+                                  setState(() {
+                                    red = value;
+                                  });
+                                },
+                              ),
+                              Slider(
+                                thumbColor: Colors.green,
+                                activeColor: Colors.green,
+                                value: green,
+                                min: 0,
+                                max: 255,
+                                onChanged: (value) {
+                                  setState(() {
+                                    green = value;
+                                  });
+                                },
+                              ),
+                              Slider(
+                                thumbColor: Colors.blue,
+                                activeColor: Colors.blue,
+                                value: blue,
+                                min: 0,
+                                max: 255,
+                                onChanged: (value) {
+                                  setState(() {
+                                    blue = value;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 // Confetti Fidget
@@ -233,8 +253,8 @@ class _FidgetPageState extends State<FidgetPage>
                     GestureDetector(
                       onTap: _togglePenClick,
                       child: Container(
-                        width: 100,
-                        height: 200,
+                        width: 230,
+                        height: 150,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8),
@@ -248,9 +268,9 @@ class _FidgetPageState extends State<FidgetPage>
                         ),
                         child: Center(
                           child: RotationTransition(
-                            turns:
-                                Tween(begin: 0.0, end: 0.5).animate(_controller),
-                            child: Icon(
+                            turns: Tween(begin: 0.0, end: 0.5)
+                                .animate(_controller),
+                            child: const Icon(
                               Icons.edit,
                               size: 48,
                               color: Colors.blue,
@@ -267,16 +287,16 @@ class _FidgetPageState extends State<FidgetPage>
                             onPressed: () {
                               _confcontroller.play();
                             },
+                            style: ElevatedButton.styleFrom(
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                            ),
                             child: Image.asset(
                               "assets/fidget/confetti_icon.png",
                               fit: BoxFit.contain,
-                              width: 100,
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                              padding: EdgeInsets.all(50),
+                              width: 120,
+                              height: 150,
                             ),
                           ),
                         ),
@@ -302,7 +322,7 @@ class _FidgetPageState extends State<FidgetPage>
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
@@ -310,47 +330,50 @@ class _FidgetPageState extends State<FidgetPage>
                   children: [
                     ElevatedButton(
                       onPressed: () => _navigateToPage(PopFidgetToy()),
+                      style: ElevatedButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        padding: const EdgeInsets.all(50),
+                      ),
                       child: Image.asset(
                         "assets/fidget/popper_icon.png",
                         fit: BoxFit.contain,
                         width: 30,
                         height: 30,
                       ),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10))),
-                        padding: EdgeInsets.all(50),
-                      ),
                     ),
                     ElevatedButton(
                       onPressed: () => _navigateToPage(CounterScreen()),
+                      style: ElevatedButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        padding: EdgeInsets.all(50),
+                      ),
                       child: Image.asset(
                         "assets/fidget/tap_icon.png",
                         fit: BoxFit.contain,
                         width: 30,
                         height: 30,
                       ),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10))),
-                        padding: EdgeInsets.all(50),
-                      ),
                     ),
                     ElevatedButton(
                       onPressed: () => _navigateToPage(FlashCardPage()),
+                      style: ElevatedButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        padding: EdgeInsets.all(50),
+                      ),
                       child: Image.asset(
                         "assets/fidget/flash_icon.png",
                         fit: BoxFit.contain,
                         width: 30,
                         height: 30,
                       ),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10))),
-                        padding: EdgeInsets.all(50),
-                      ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                   ],
