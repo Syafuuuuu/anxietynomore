@@ -128,6 +128,7 @@ flutter:
     - assets/fidget/popper_icon.png
     - assets/fidget/flash_icon.png
     - assets/fidget/tap_icon.png
+    - assets/fidget/confetti_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

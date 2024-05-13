@@ -84,212 +84,279 @@ class _FidgetPageState extends State<FidgetPage>
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              // Toggle Button
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Switch(
-                    value: isToggleOn,
-                    onChanged: (newValue) {
-                      _toggleToggle();
-                    },
-                  ),
-                  GestureDetector(
-                    onTap: _toggleLamp,
-                    child: Container(
-                      width: 100,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: isLampOn ? Colors.yellow[200] : Colors.grey[200],
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            blurRadius: 5,
-                            spreadRadius: 1,
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                // Toggle Button
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Switch(
+                      value: isToggleOn,
+                      onChanged: (newValue) {
+                        _toggleToggle();
+                      },
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    GestureDetector(
+                      onTap: _toggleLamp,
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          color: isLampOn ? Colors.yellow[200] : Colors.grey[200],
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Icon(
+                            isLampOn ? Icons.lightbulb : Icons.lightbulb_outline,
+                            size: 48,
+                            color:
+                                isLampOn ? Colors.yellow[800] : Colors.grey[600],
                           ),
-                        ],
+                        ),
                       ),
-                      child: Center(
-                        child: Icon(
-                          isLampOn ? Icons.lightbulb : Icons.lightbulb_outline,
-                          size: 48,
-                          color:
-                              isLampOn ? Colors.yellow[800] : Colors.grey[600],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                // Custom Spacebar Key
+                GestureDetector(
+                  onTap: _toggleSpacebar,
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 100),
+                    width: isSpacebarPressed ? 350 : 400,
+                    height: isSpacebarPressed ? 40 : 50,
+                    decoration: BoxDecoration(
+                      color: isSpacebarPressed ? Colors.blue : Colors.grey,
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 5,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        'SPACE',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
-              // Custom Spacebar Key
-              GestureDetector(
-                onTap: _toggleSpacebar,
-                child: AnimatedContainer(
-                  duration: Duration(milliseconds: 100),
-                  width: isSpacebarPressed ? 350 : 400,
-                  height: isSpacebarPressed ? 40 : 50,
-                  decoration: BoxDecoration(
-                    color: isSpacebarPressed ? Colors.blue : Colors.grey,
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 5,
-                        spreadRadius: 1,
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      'SPACE',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  RGBBox(Color.fromRGBO(
-                      red.toInt(), green.toInt(), blue.toInt(), 1)),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Slider(
-                        thumbColor: Colors.red,
-                        activeColor: Colors.red,
-                        value: red,
-                        min: 0,
-                        max: 255,
-                        onChanged: (value) {
-                          setState(() {
-                            red = value;
-                          });
-                        },
-                      ),
-                      Slider(
-                        thumbColor: Colors.green,
-                        activeColor: Colors.green,
-                        value: green,
-                        min: 0,
-                        max: 255,
-                        onChanged: (value) {
-                          setState(() {
-                            green = value;
-                          });
-                        },
-                      ),
-                      Slider(
-                        thumbColor: Colors.blue,
-                        activeColor: Colors.blue,
-                        value: blue,
-                        min: 0,
-                        max: 255,
-                        onChanged: (value) {
-                          setState(() {
-                            blue = value;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              // Lamp
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Stack(
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.center,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            _confcontroller.play();
+                SizedBox(
+                  height: 20,
+                ),
+                //RGB Colour Fidget
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RGBBox(Color.fromRGBO(
+                        red.toInt(), green.toInt(), blue.toInt(), 1)),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Slider(
+                          thumbColor: Colors.red,
+                          activeColor: Colors.red,
+                          value: red,
+                          min: 0,
+                          max: 255,
+                          onChanged: (value) {
+                            setState(() {
+                              red = value;
+                            });
                           },
-                          child: Image.asset("assets/fidget/popper_icon.png"),
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                            padding: EdgeInsets.all(50),
+                        ),
+                        Slider(
+                          thumbColor: Colors.green,
+                          activeColor: Colors.green,
+                          value: green,
+                          min: 0,
+                          max: 255,
+                          onChanged: (value) {
+                            setState(() {
+                              green = value;
+                            });
+                          },
+                        ),
+                        Slider(
+                          thumbColor: Colors.blue,
+                          activeColor: Colors.blue,
+                          value: blue,
+                          min: 0,
+                          max: 255,
+                          onChanged: (value) {
+                            setState(() {
+                              blue = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                // Confetti Fidget
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Clicking Pen
+                    GestureDetector(
+                      onTap: _togglePenClick,
+                      child: Container(
+                        width: 100,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: RotationTransition(
+                            turns:
+                                Tween(begin: 0.0, end: 0.5).animate(_controller),
+                            child: Icon(
+                              Icons.edit,
+                              size: 48,
+                              color: Colors.blue,
+                            ),
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: ConfettiWidget(
-                          confettiController: _confcontroller,
-                          blastDirectionality: BlastDirectionality.explosive,
-                          // blastDirection: 3.14, // radial value
-                          maxBlastForce:
-                              50, // set a lower number for slow explosions
-                          minBlastForce:
-                              30, // set a higher number for faster explosions
-                          emissionFrequency: 0.05, // how often it should emit
-                          numberOfParticles: 50,
-                          maximumSize: const Size(10.0, 10.0),
-                          minimumSize: const Size(
-                              5.0, 5.0), // number of particles to emit
-                          gravity: 1,
+                    ),
+                    Stack(
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.center,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              _confcontroller.play();
+                            },
+                            child: Image.asset(
+                              "assets/fidget/confetti_icon.png",
+                              fit: BoxFit.contain,
+                              width: 100,
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              padding: EdgeInsets.all(50),
+                            ),
+                          ),
                         ),
+                        Container(
+                          alignment: Alignment.center,
+                          child: ConfettiWidget(
+                            confettiController: _confcontroller,
+                            blastDirectionality: BlastDirectionality.explosive,
+                            // blastDirection: 3.14, // radial value
+                            maxBlastForce:
+                                50, // set a lower number for slow explosions
+                            minBlastForce:
+                                30, // set a higher number for faster explosions
+                            emissionFrequency: 0.05, // how often it should emit
+                            numberOfParticles: 50,
+                            maximumSize: const Size(10.0, 10.0),
+                            minimumSize: const Size(
+                                5.0, 5.0), // number of particles to emit
+                            gravity: 1,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () => _navigateToPage(PopFidgetToy()),
+                      child: Image.asset(
+                        "assets/fidget/popper_icon.png",
+                        fit: BoxFit.contain,
+                        width: 30,
+                        height: 30,
                       ),
-                    ],
-                  )
-                ],
-              ),
-              // Clicking Pen
-              GestureDetector(
-                onTap: _togglePenClick,
-                child: Container(
-                  width: 100,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 5,
-                        spreadRadius: 1,
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: RotationTransition(
-                      turns: Tween(begin: 0.0, end: 0.5).animate(_controller),
-                      child: Icon(
-                        Icons.edit,
-                        size: 48,
-                        color: Colors.blue,
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                        padding: EdgeInsets.all(50),
                       ),
                     ),
-                  ),
+                    ElevatedButton(
+                      onPressed: () => _navigateToPage(CounterScreen()),
+                      child: Image.asset(
+                        "assets/fidget/tap_icon.png",
+                        fit: BoxFit.contain,
+                        width: 30,
+                        height: 30,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                        padding: EdgeInsets.all(50),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => _navigateToPage(FlashCardPage()),
+                      child: Image.asset(
+                        "assets/fidget/flash_icon.png",
+                        fit: BoxFit.contain,
+                        width: 30,
+                        height: 30,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                        padding: EdgeInsets.all(50),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () => _navigateToPage(PopFidgetToy()),
-                    child: Image.asset("assets/fidget/popper_icon.png"),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => _navigateToPage(CounterScreen()),
-                    child: Image.asset("assets/fidget/tap_icon.png"),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => _navigateToPage(FlashCardPage()),
-                    child: Image.asset("assets/fidget/flash_icon.png"),
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
