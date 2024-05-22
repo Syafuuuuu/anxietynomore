@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:anxietynomore/contacts_page.dart';
 import 'package:anxietynomore/music_page.dart';
 import 'package:flutter/services.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 class PopFidgetToy extends StatefulWidget {
   @override
@@ -10,11 +11,15 @@ class PopFidgetToy extends StatefulWidget {
 
 class _PopFidgetToyState extends State<PopFidgetToy> {
   List<bool> isPopped = List.generate(35, (index) => false);
+  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer();
 
   void togglePop(int index) {
     setState(() {
       isPopped[index] = !isPopped[index];
       HapticFeedback.heavyImpact();
+      _assetsAudioPlayer.open(
+                    Audio("assets/effects/pop.mp3"),
+                  );
     });
   }
 

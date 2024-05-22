@@ -87,7 +87,7 @@ class _ASMRAppState extends State<ASMRApp> {
                   child: AspectRatio(
                     aspectRatio: 1.0, // Control the aspect ratio of your images
                     child: Image.asset(images[index]),
-                  ),
+                  ),  
                 );
               },
             ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:anxietynomore/pop_fidget_toy.dart';
 import 'package:anxietynomore/flash_card_grid.dart';
 import 'package:confetti/confetti.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 class FidgetPage extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _FidgetPageState extends State<FidgetPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late ConfettiController _confcontroller;
+  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer();
   bool isToggleOn = false;
   bool isSpacebarPressed = false;
   bool isLampOn = false;
@@ -34,12 +36,19 @@ class _FidgetPageState extends State<FidgetPage>
   void _toggleToggle() {
     setState(() {
       isToggleOn = !isToggleOn;
+      _assetsAudioPlayer.open(
+                    Audio("assets/effects/switch.mp3"),
+                  );
     });
   }
 
   void _toggleSpacebar() {
     setState(() {
       isSpacebarPressed = true;
+      _assetsAudioPlayer.open(
+                    Audio("assets/effects/click.mp3"),
+                  );
+      print("clicky");
     });
 
     Future.delayed(Duration(milliseconds: 300), () {
@@ -52,6 +61,9 @@ class _FidgetPageState extends State<FidgetPage>
   void _toggleLamp() {
     setState(() {
       isLampOn = !isLampOn;
+      _assetsAudioPlayer.open(
+                    Audio("assets/effects/switch.mp3"),
+                  );
     });
   }
 
@@ -60,8 +72,14 @@ class _FidgetPageState extends State<FidgetPage>
       isPenClicked = !isPenClicked;
       if (isPenClicked) {
         _controller.forward();
+        _assetsAudioPlayer.open(
+                    Audio("assets/effects/click.mp3"),
+                  );
       } else {
         _controller.reverse();
+        _assetsAudioPlayer.open(
+                    Audio("assets/effects/click.mp3"),
+                  );
       }
     });
   }
