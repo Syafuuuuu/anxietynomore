@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:anxietynomore/contacts_page.dart';
 import 'package:anxietynomore/music_page.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 class FlashCardPage extends StatelessWidget {
   @override
@@ -97,10 +98,19 @@ class CustomFlipCard extends StatefulWidget {
 
 class _CustomFlipCardState extends State<CustomFlipCard> {
   bool isFlipped = false;
+  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer();
 
   void _toggleCard() {
     setState(() {
       isFlipped = !isFlipped;
+    });
+  }
+
+  void _playSound(){
+    setState(() {
+      _assetsAudioPlayer.open(
+                    Audio("assets/effects/pop.mp3"),
+                  ); //Flipping Audio Here
     });
   }
 
@@ -112,6 +122,7 @@ class _CustomFlipCardState extends State<CustomFlipCard> {
         direction: FlipDirection.HORIZONTAL,
         front: _buildCard(widget.frontText, widget.frontColor),
         back: _buildCard(widget.backText, widget.backColor),
+        onFlip: _playSound,
       ),
     );
   }
